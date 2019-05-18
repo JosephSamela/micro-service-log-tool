@@ -1,0 +1,56 @@
+    <!DOCTYPE html>
+
+<head>
+    <title>Log Tool - Welcome</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Log Tool - Canonical</h1>
+
+    Hello! I am <a href="https://josephsamela.github.io/resume/">Joseph Samela</a>. Thank you for taking the time to review my submission!
+
+    <h2>Submission</h2>
+
+    <p><a href="/static/source.zip">Here is a .zip of my source code.</a></p>
+
+    <p>
+        As requested - this API is an http server written in Python that can receive, store and retrieve log events. Events are described by this schema:
+        <pre>
+        {
+            "source":"Customer Information Service",
+            "code":1255,
+            "type":"Information",
+            "description":"example"
+        }
+        </pre>
+        Where each value is defined as such:
+        <ul>
+            <li>Source - The remote service from which the log originated</li>
+            <li>Code - The remote service unique event code used to track the origin of this log (ex. Error code)</li>
+            <li>Type - Log type used to indicate level of severity (ie. "Information", "Critical", "Warning")</li>
+            <li>Description - Body of log message or report.</li>
+        </ul>
+        <br>
+        The API has two endpoints:
+        <br><br>
+        <a href="/submit">/submit</a> to submit new logs.
+        <br>
+        <a href="/search">/search</a> to search existing logs.
+    </p>
+
+    <h2>Deployment</h2>
+    <p>
+    For remote testing prior to the interview - I deployed this application to my VPS (running Ubuntu Server 😉️) hosted by Google Compute Engine. It's running behind nginx (reverse-proxy). All the logs are stored and retrieved from an sqlite database.
+    </p>
+
+    <h2>Future Improvement</h2>
+    <p>If this project was more than proof of concept I would make the following improvements:</p>
+    <ul>
+        <li>Performance - I would fix this with a memcache to buffer incoming logs and write them to the database when ready.</li>
+        <li>Authentication - anyone can see the contents of any submitted log</li>
+        <li>Validation - you can submit logs that break application if they have invalid schema</li>
+        <li>Security - ou can submit literally <i>any</i> query via <a href="/search">/search<a>. There's nothing stopping you from modifying the table, creating new tables, reading other table etc.</li>
+        <li>Error handling - It would be nice to have easy to understand error message. Maybe it could log error messages to iself?</li>
+    </ul>
+</body>

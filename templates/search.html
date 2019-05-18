@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Log Tool - Search</title>
+    <link href="/static/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/static/post.js"></script>
+</head>
+
+<body>
+    <h1>Log Tool - Search</h1>
+
+    <h2>Documentation</h2>
+
+    <p>The API <a href="/search">/search</a> method allows remote applications or microservices to search existing logs with an http POST request! Search queries contain a SQL query string as the body of the POST request.</p>
+
+    <p>For example - to search for every log, send the following POST request.</p>
+    <code>
+        $ curl --data 'SELECT * FROM logs' http://localhost:8080/search
+    </code>
+
+    <p>Alternatively, use the live example below.</p>
+
+    <h2>Live Example</h2>
+
+    <input id="query" type="text" value="SELECT * FROM logs">
+    <button onclick="search()">Search</button>
+    <button onclick="location.reload()">Reset</button>
+
+    <p>
+        Here are some other examples:
+        <br>
+        <code>SELECT * FROM logs</code>
+        <br>
+        <code>SELECT * FROM logs WHERE id = 4</code>
+        <br>
+        <code>SELECT * FROM logs WHERE source = "Customer Billing Service"</code>
+        <br>
+        <code>SELECT * FROM logs WHERE type = "Warning"</code>
+    </p>
+
+    <h2>Logs</h2>
+
+    <table id=logs>
+       <tr>
+           <td><b>ID</b></td>
+           <td><b>Timestamp</b></td>
+           <td><b>Source</b></td>
+           <td><b>Code</b></td>
+           <td><b>Type</b></td>
+           <td><b>Description</b></td>
+       </tr>
+       {% for log in logs %}
+       <tr>
+           <td>{{log[0]}}</td>
+           <td>{{log[1]}}</td>
+           <td>{{log[2]}}</td>
+           <td>{{log[3]}}</td>
+           <td>{{log[4]}}</td>
+           <td>{{log[5]}}</td>
+       </tr>
+       {% endfor %}
+    </table>
+
+</body>

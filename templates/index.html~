@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Log Tool - Welcome</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Log Tool</h1>
+    <p>The API has two functions.</p>
+    <p>
+        The <a href="/submit">/submit</a> method allows remote services to <i>submit new logs</i>.
+    </p>
+    <p>
+        The <a href="/search">/search</a> method allows remote services to <i>search existing logs</i>.
+    </p>
+</body>
