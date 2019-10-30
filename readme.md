@@ -1,14 +1,16 @@
 # Micro Service Log Tool
 
 This API is an http server written in Python that can receive, store and retrieve log events. Events are described by this schema:
-```json
+
+```
         {
             "source":"Customer Information Service",
             "code":1255,
             "type":"Information",
             "description":"example"
         }
-```     
+```
+
 >Where each value is defined as such:
 >Source - The remote service from which the log originated
 >Code - The remote service unique event code used to track the origin of this log (ex. Error code)
@@ -17,7 +19,8 @@ This API is an http server written in Python that can receive, store and retriev
 
 The API has two endpoints: 
 
-`/submit` to submit new logs. 
+`/submit` to submit new logs.
+
 `/search` to search existing logs.
 
 ## Deployment
@@ -42,6 +45,7 @@ $ curl --header "Content-Type: application/json" --data '{"source":"Customer Inf
 The API /search method allows remote applications or microservices to search existing logs with an http POST request! Search queries contain a SQL query string as the body of the POST request.
 
 For example - to search for every log, send the following POST request.
+
 ```
 $ curl --data 'SELECT * FROM logs' http://35.196.103.242/search
 ```
@@ -51,9 +55,9 @@ $ curl --data 'SELECT * FROM logs' http://35.196.103.242/search
 ## Future Improvement
 If this project was more than proof of concept I would make the following improvements:
 
-Performance - I would fix this with a memcache to buffer incoming logs and write them to the database when ready.
-Authentication - anyone can see the contents of any submitted log
-Validation - you can submit logs that break application if they have invalid schema
-Security - ou can submit literally any query via /search. There's nothing stopping you from modifying the table, creating new tables, reading other table etc.
-Error handling - It would be nice to have easy to understand error message. Maybe it could log error messages to iself?
+* Performance - I would fix this with a memcache to buffer incoming logs and write them to the database when ready.
+* Authentication - anyone can see the contents of any submitted log
+* Validation - you can submit logs that break application if they have invalid schema
+* Security - ou can submit literally any query via /search. There's nothing stopping you from modifying the table, creating new tables, reading other table etc.
+* Error handling - It would be nice to have easy to understand error message. Maybe it could log error messages to iself?
 
